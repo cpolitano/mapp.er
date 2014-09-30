@@ -20,12 +20,11 @@ class PinsController < ApplicationController
   		@pin = Pin.new(pin_params)
   	if @pin.save
       respond_to do |format|
-      format.html { redirect_to @pin }
-      format.json { render json: @pin }
+      format.html
+      format.json { render :json => @pin }
       end
-      redirect_to @pin, notice: 'Pin was successfully saved.'
   	else 
-  	  render :new
+  	  render :index
   	end
   end
 

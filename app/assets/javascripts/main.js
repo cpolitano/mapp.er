@@ -34,24 +34,24 @@ function initialize() {
 	var latitude = event.latLng.lat().toFixed(3);
 	var longitude = event.latLng.lng().toFixed(3);
 	console.log(latitude, longitude);
-    $.ajax({
-      type: "POST",
-      dataType: 'json',
-      url: '/pins',
-      data: { pin: { longitude: longitude, latitude: latitude } },
-      success: function () {
-        console.log("post request success");
-        var location = new google.maps.LatLng(latitude, longitude);
-		var newMarker = new google.maps.Marker({
-		  position: location,
-		  map: map
-      	});
-	  },
-      error: function() {
-        console.log("post didn't work");
-      },
-    });
-});
+	    $.ajax({
+	      type: "POST",
+	      dataType: 'json',
+	      url: '/pins',
+	      data: { pin: { longitude: longitude, latitude: latitude } },
+	      success: function (data) {
+	        console.log("post request success");
+	        var location = new google.maps.LatLng(data.latitude, data.longitude);
+			var newMarker = new google.maps.Marker({
+			  position: location,
+			  map: map
+	      	});
+		  },
+	      error: function() {
+	        console.log("post didn't work");
+	      	},
+	    });
+	});
 
 
 }
